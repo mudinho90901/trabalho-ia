@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfico de Redes Sociais</title>
+  <style>
+    :root {
+      --primary-color: #ff6347; /* Exemplo: vermelho-tomate */
+      --secondary-color: #4682b4; /* Exemplo: azul-aço */
+      --bg-color: #f0f8ff; /* Exemplo: azul claro */
+      --font: 'Arial, sans-serif';
+    }
+
+    .grafico {
+      margin-top: 3rem;
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grafico" id="grafico"></div>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    // Função para pegar o valor de uma variável CSS
+    const getCSS = (variavel) => {
+      return getComputedStyle(document.body).getPropertyValue(variavel);
+    };
+
+    // Configuração da fonte dos eixos
+    const tickConfig = {
+      color: getCSS('--primary-color').trim(),
+      size: 16,
+      family: getCSS('--font').trim()
+    };
+
+    // Configuração do layout do gráfico
+    const layout = {
+      plot_bgcolor: getCSS('--bg-color').trim(),
+      paper_bgcolor: getCSS('--bg-color').trim(),
+      title: {
+        text: 'Redes sociais com mais usuários no mundo',
+        x: 0,
+        font: {
+          color: getCSS('--primary-color').trim(),
+          family: getCSS('--font').trim(),
+          size: 30
+        }
+      },
+      xaxis: {
+        tickfont: tickConfig,
+        title: {
+          text: 'Nome das redes sociais',
+          font: {
+            color: getCSS('--secondary-color').trim()
+          }
+        }
+      },
+      yaxis: {
+        tickfont: tickConfig,
+        title: {
+          text: 'Bilhões de usuários ativos',
+          font: {
+            color: getCSS('--secondary-color').trim()
+          }
+        }
+      }
+    };
+
+    // Dados do gráfico (exemplo)
+    const data = [
+      {
+        x: ['Facebook', 'YouTube', 'WhatsApp', 'Instagram'], // Exemplos de nomes
+        y: [2.9, 2.5, 2.3, 2.0], // Exemplos de quantidade de usuários em bilhões
+        type: 'bar',
+        marker: {
+          color: getCSS('--primary-color').trim()
+        }
+      }
+    ];
+
+    // Renderização do gráfico
+    Plotly.newPlot('grafico', data, layout);
+  </script>
+</body>
+</html>
