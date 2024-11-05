@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Usuários</title>
+    <style>
+        :root {
+            --primary-color: red;
+            --bg-color: #f0f0f0;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #grafico {
+            width: 80%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="grafico"></div>
+
+    <script type="module">
+        // Função para obter valor de uma variável CSS
+        const getCSS = (variavel) => {
+            return getComputedStyle(document.body).getPropertyValue(variavel).trim();
+        };
+
+        // Dados do gráfico
+        const data = [
+            {
+                x: ['Facebook', 'Instagram', 'Twitter', 'LinkedIn'], // Exemplo de nomes de redes
+                y: [1200, 800, 450, 300], // Exemplo de quantidade de usuários
+                type: 'bar',
+                marker: {
+                    color: getCSS('--primary-color')
+                }
+            }
+        ];
+
+        // Layout do gráfico
+        const layout = {
+            plot_bgcolor: getCSS('--bg-color'),
+            paper_bgcolor: getCSS('--bg-color'),
+            title: 'Quantidade de Usuários por Rede Social'
+        };
+
+        // Renderizando o gráfico
+        const grafico = document.getElementById("grafico");
+        Plotly.newPlot(grafico, data, layout);
+    </script>
+</body>
+</html>
